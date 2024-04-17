@@ -1,19 +1,53 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Homepage from '../views/Homepage.vue'
+import ResumeHome from '../views/ResumeHome.vue'
+import AssignmentTrackerHome from '../views/AssignmentTrackerHome.vue'
+import CitationGeneratorHome from '../views/CitationGeneratorHome.vue'
+import CVHome from '../views/CVHome.vue'
+import PosterHome from '../views/PosterHome.vue'
+import PresentationHome from '../views/PresentationHome.vue'
+import ResumeInput from '../views/ResumeInput.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/homepage',
+    name: 'homepage',
+    component: Homepage
+  }, 
+  {
+    path: '/resumehome',
+    name: 'resumehome',
+    component: ResumeHome
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/assignmenttrackerhome',
+    name: 'assignmenttrackerhome',
+    component: AssignmentTrackerHome
+  },
+  {
+    path: '/citationgeneratorhome',
+    name: 'citationgeneratorhome',
+    component: CitationGeneratorHome
+  },
+  {
+    path: '/cvhome',
+    name: 'cvhome',
+    component: CVHome
+  },
+  {
+    path: '/posterhome',
+    name: 'posterhome',
+    component: PosterHome
+  },
+  {
+    path: '/presentationhome',
+    name: 'presentationhome',
+    component: PresentationHome
+  },
+  {
+    path: '/resumeinput',
+    name: 'resumeinput',
+    component: ResumeInput
   }
 ]
 

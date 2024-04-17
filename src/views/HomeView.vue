@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>{{ name }}</p>
+    <button @click="changeName">Click me</button>
+    <p v-if="name==='Hannah'">Great name!</p>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<style scoped>
 
+</style>
+
+<script>
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  mounted() {
+    
+  },
+  data: () => {
+    return {
+      name: "Hannah"
+    }
+  },
+  methods: {
+    changeName() {
+      this.name = "Alex"
+    }
   }
 }
 </script>
