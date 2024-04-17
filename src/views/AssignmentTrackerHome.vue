@@ -33,7 +33,7 @@
             <ul>
                 <li>NEW FEATURE - pair our site with your school database to automatically sync dates!!</li>
                 <li>We are here to make being a student your only job!</li>
-            </ul>
+            </ul><br>
         </section>
 
         <router-link to="">
