@@ -43,6 +43,6 @@ In the future I would like to add a feature that will just accept the link to a 
 
 <h1>Installation and Setup</h1>
 
-This website is fully operational through the Homepage.html file. Users just looking to utilize Template Scholar services should navigate here [HERE](http://127.0.0.1:3000/Homepage.html)
+This website is fully operational through the Homepage.html file. Users just looking to utilize Template Scholar services should navigate here.
 
 Users looking to customize their experience further should clone the repo to their computer. HTML files are named appropriately for navigation. CSS and JS files determine style and functions, respectively.
