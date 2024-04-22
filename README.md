@@ -1,4 +1,7 @@
-# templates-scholar
+# Templates-Scholar
+
+## Prerequisite
+Node is needed to run all npm commands. This was developed on Node v20.11.0, later versions are compatible but avoid earlier versions for smooth operation
 
 ## Project setup
 ```
