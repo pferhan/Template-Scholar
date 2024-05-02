@@ -7,6 +7,7 @@ import CVHome from '../views/CVHome.vue'
 import PosterHome from '../views/PosterHome.vue'
 import PresentationHome from '../views/PresentationHome.vue'
 import ResumeInput from '../views/ResumeInput.vue'
+import StyledResume from '@/views/StyledResume.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/resumeinput',
     name: 'resumeinput',
     component: ResumeInput
+  },
+  {
+    path: '/styledresume',
+    name: 'styledresume',
+    component: StyledResume
   }
 ]
 

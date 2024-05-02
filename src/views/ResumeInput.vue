@@ -147,10 +147,9 @@
           <button v-if="awards.length > 0" @click="clearAwards">Clear Awards</button>
       </div>
 
-        <!--add additional section for details not covered here-->
-    </div>
-
-    <button @click="generatePDF">Create Resume</button>
+      <button @click="generateResume">Generate Resume</button> 
+      <StyledResume v-if="showStyledResume" :resumeData="generatedResumeData" />
+  </div>
 </template>
 
 <style scoped>
@@ -297,9 +296,13 @@ ul {
 </style>
 
 <script>
-import jsPDF from 'jspdf';
+//import jsPDF from 'jspdf';
+import StyledResume from './StyledResume.vue';
 
 export default {
+  components: {
+    StyledResume
+  },
   data() {
     return {
       firstName: '',
@@ -318,7 +321,9 @@ export default {
       completedEducations: [],
       projects: [],
       completedProjects: [],
-      yOffset: 10
+      //yOffset: 10
+      showStyledResume: false,
+      generatedResumeData: {}
     };
   },
   methods: {
@@ -370,55 +375,73 @@ export default {
       this.projects[index].visible = false;
       this.completedProjects.push(this.projects[index]);
     },
-    generatePDF() {
-      const doc = new jsPDF();
-      const checkPageHeight = () => {
-        const pageHeight = doc.internal.pageSize.height;
-        if (this.yOffset + 10 > pageHeight) { 
-          doc.addPage();
-          this.yOffset = 10;
-        }
+    generateResume() {
+      const resumeData = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        phone: this.phone,
+        skills: this.skills,
+        certifications: this.certifications,
+        awards: this.awards,
+        completedEmployments: this.completedEmployments,
+        completedEducations: this.completedEducations,
+        completedProjects: this.completedProjects,
       };
 
-      const addListSection = (title, contentArray) => {
-        doc.text(title, 10, this.yOffset);
-        contentArray.forEach((item, index) => {
-          doc.text(`${index + 1}. ${item}`, 10, this.yOffset += 10);
-        });
-        this.yOffset += 10;
-        checkPageHeight();
-      };
+      this.generatedResumeData = resumeData;
 
-      const addDetailedSection = (title, contentArray, fieldNames) => {
-        doc.text(title, 10, this.yOffset);
-        contentArray.forEach((item, index) => {
-          fieldNames.forEach(field => {
-            doc.text(`  ${field}: ${item[field]}`, 10, this.yOffset += 10);
-          });
-          this.yOffset += 5;
-        });
-        this.yOffset += 10;
-        checkPageHeight();
-      };
-
-      addListSection(`Personal Information`, [this.firstName, this.lastName, this.email, this.phone]);
-      addListSection(`Skills`, this.skills);
-      addDetailedSection(`Education`, this.educations, ['degree', 'major', 'institution', 'graduationYear', 'gpa']);
-      addDetailedSection(`Relevant Projects`, this.projects, ['projectTitle', 'projectDetails']);
-      addListSection(`Certification`, this.certifications);
-      addDetailedSection(`Employment`, this.employments, ['company', 'jobTitle', 'duration', 'jobDescription']);
-      addListSection(`Awards`, this.awards);
-
-      //save and open pdf
-      const pdfBlob = doc.output('blob');
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-      const downloadLink = document.createElement('a');
-      downloadLink.href = pdfUrl;
-      downloadLink.download = 'resume.pdf';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
+      this.showStyledResume = true;
     }
+    // generatePDF() {
+    //   const doc = new jsPDF();
+    //   const checkPageHeight = () => {
+    //     const pageHeight = doc.internal.pageSize.height;
+    //     if (this.yOffset + 10 > pageHeight) { 
+    //       doc.addPage();
+    //       this.yOffset = 10;
+    //     }
+    //   };
+
+    //   const addListSection = (title, contentArray) => {
+    //     doc.text(title, 10, this.yOffset);
+    //     contentArray.forEach((item, index) => {
+    //       doc.text(`${index + 1}. ${item}`, 10, this.yOffset += 10);
+    //     });
+    //     this.yOffset += 10;
+    //     checkPageHeight();
+    //   };
+
+    //   const addDetailedSection = (title, contentArray, fieldNames) => {
+    //     doc.text(title, 10, this.yOffset);
+    //     contentArray.forEach((item, index) => {
+    //       fieldNames.forEach(field => {
+    //         doc.text(`  ${field}: ${item[field]}`, 10, this.yOffset += 10);
+    //       });
+    //       this.yOffset += 5;
+    //     });
+    //     this.yOffset += 10;
+    //     checkPageHeight();
+    //   };
+
+    //   addListSection(`Personal Information`, [this.firstName, this.lastName, this.email, this.phone]);
+    //   addListSection(`Skills`, this.skills);
+    //   addDetailedSection(`Education`, this.educations, ['degree', 'major', 'institution', 'graduationYear', 'gpa']);
+    //   addDetailedSection(`Relevant Projects`, this.projects, ['projectTitle', 'projectDetails']);
+    //   addListSection(`Certification`, this.certifications);
+    //   addDetailedSection(`Employment`, this.employments, ['company', 'jobTitle', 'duration', 'jobDescription']);
+    //   addListSection(`Awards`, this.awards);
+
+    //   //save and open pdf
+    //   const pdfBlob = doc.output('blob');
+    //   const pdfUrl = URL.createObjectURL(pdfBlob);
+    //   const downloadLink = document.createElement('a');
+    //   downloadLink.href = pdfUrl;
+    //   downloadLink.download = 'resume.pdf';
+    //   document.body.appendChild(downloadLink);
+    //   downloadLink.click();
+    //   document.body.removeChild(downloadLink);
+    // }
   }
 };
 </script>
